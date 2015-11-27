@@ -1,2 +1,2 @@
 # scripts
-something shit I write about work
+Something shit I write about work.
