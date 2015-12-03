@@ -1,0 +1,23 @@
+#!/bin/bash
+#this is a log zip backup script update at 2015 by zhuhj10338
+#59 23 * * * /home/username/workspace/scripts/log_7z>/home/username/workspace/scripts/log/log_7z.log;
+
+TMPYEAR=`date +%y`
+TMPDATE=`date +%m%d`
+TMPWEEK=`date +%w`
+. /home/trade/.bash_profile
+#export PATH=$PATH:/usr/local/bin;
+
+cd /home/trade/workspace
+
+7za a -r -t7z log_20${TMPYEAR}${TMPDATE}.7z log
+
+date
+
+echo "zip success!"
+
+rm /home/trade/workspace/log/
+
+find /home/trade/workspace/ -mtime +14 -type f -name '*.7z' -exec rm -f {} \;
+
+cd /home/web
