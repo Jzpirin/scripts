@@ -21,7 +21,7 @@ date
 echo "zip success!"
 
 rm  /home/web/apache-tomcat-7.0.57/logs/
-find /home/web/apache-tomcat-7.0.57/ -mtime +14 -type f -name *.7z -exec rm -f {} \;
+find /home/web/apache-tomcat-7.0.57/ -mtime +14 -type f -name '*.7z' -exec rm -f {} \;
 cd /home/web
 . /home/web/.bash_profile
 ./runweb
