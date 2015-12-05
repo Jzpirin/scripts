@@ -6,11 +6,11 @@ TMPYEAR=`date +%y`
 TMPDATE=`date +%m%d`
 TMPWEEK=`date +%w`
 . /home/trade/.bash_profile
-#export PATH=$PATH:/usr/local/bin;
+export PATH=$PATH:/usr/local/bin;
 
 cd /home/trade/workspace
 
-7za a -r -t7z runlog_20${TMPYEAR}${TMPDATE}.7z runlog.log.*
+7za a -r -t7z /home/trade/logback/runlog_20${TMPYEAR}${TMPDATE}.7z runlog.log.*
 
 date
 
@@ -18,6 +18,5 @@ echo "zip success!"
 
 rm /home/trade/workspace/runlog.log.*
 
-find /home/trade/workspace/ -mtime +14 -type f -name '*.7z' -exec rm -f {} \;
-
+find /home/trade/logback/ -mtime +2 -type f -name '*.7z' -exec rm -f {} \;
 
