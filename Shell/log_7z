@@ -1,22 +1,30 @@
 #!/bin/bash
-#this is a log zip backup script update at 2015 by zhuhj10338
-#59 23 * * * /home/username/workspace/scripts/log_7z>/home/username/workspace/scripts/log/log_7z.log;
+#This is a log backup and 7-zip script update at 20151205 by zhuhj10338
+#59 23 * * * /home/$USERNAME/workspace/scripts/log_7z>/home/$USERNAME/workspace/scripts/log/log_7z.log;
 
-TMPYEAR=`date +%y`
+TMPYEAR=`date +%Y`
 TMPDATE=`date +%m%d`
 TMPWEEK=`date +%w`
-. /home/trade/.bash_profile
+TMPBEGINTIME=`date +%T`
+USERNAME=`whoami`
+. /home/$USERNAME/.bash_profile
 export PATH=$PATH:/usr/local/bin;
 
-cd /home/trade/workspace
+cd /home/$USERNAME/workspace
 
-7za a -r -t7z /home/trade/logback/log_20${TMPYEAR}${TMPDATE}.7z log
+echo "BACKUP DATE:"$TMPYEAR $TMPDATE
+
+echo "BACKUP BEGIN TIME:"$TMPBEGINTIME
+
+7za a -r -t7z /home/$USERNAME/logback/runlog_${TMPYEAR}${TMPDATE}.7z runlog.log.*
 
 date
 
 echo "zip success!"
 
-rm /home/trade/workspace/log/*
+rm /home/$USERNAME/workspace/runlog.log.*
 
-find /home/trade/logback/ -mtime +2 -type f -name '*.7z' -exec rm -f {} \;
+find /home/$USERNAME/logback/ -mtime +2 -type f -name '*.7z' -exec rm -f {} \;
 
+TMPENDTIME=`date +%T`
+echo "BACKUP END TIME:"$TMPENDTIME
