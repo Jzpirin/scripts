@@ -11,4 +11,3 @@ md "D:\TOOLS\SetupH3_Yun\dbbak"
 set backupendtime=%time%
 echo Backup END Time:%backupendtime%>>D:\DBBAK\backup.log
 echo ALL Success>>D:\DBBAK\backup.log
-pause
