@@ -16,13 +16,13 @@ echo "BACKUP DATE:"$TMPYEAR $TMPDATE
 
 echo "BACKUP BEGIN TIME:"$TMPBEGINTIME
 
-7za a -r -t7z /home/$USERNAME/logback/runlog_${TMPYEAR}${TMPDATE}.7z runlog.log.*
+7za a -r -t7z /home/$USERNAME/logback/log_${TMPYEAR}${TMPDATE}.7z log
 
 date
 
 echo "zip success!"
 
-rm /home/$USERNAME/workspace/runlog.log.*
+rm /home/$USERNAME/workspace/log/*
 
 find /home/$USERNAME/logback/ -mtime +2 -type f -name '*.7z' -exec rm -f {} \;
 
