@@ -5,25 +5,34 @@
 TMPYEAR=`date +%y`
 TMPDATE=`date +%m%d`
 TMPWEEK=`date +%w`
-USER=`whoami`
-. /home/web/.bash_profile
-#export PATH=$PATH:/usr/local/bin;
+TMPBEGINTIME=`date +%T`
+USERNAME=`whoami`
+. /home/$USERNAME/.bash_profile
+export PATH=$PATH:/usr/local/bin;
 
-cd /home/web
+cd /home/$USERNAME
 
-./killweb
+echo "BACKUP DATE:"$TMPYEAR $TMPDATE
 
-cd /home/web/apache-tomcat-7.0.57
+echo "BACKUP BEGIN TIME:"$TMPBEGINTIME
 
-7za a -r -t7z log_20${TMPYEAR}${TMPDATE}.7z logs
+./killdbsync
+
+cd /home/$USERNAME/apache-tomcat-7.0.57
+
+7za a -r -t7z /home/$USERNAME/logback/log_20${TMPYEAR}${TMPDATE}.7z logs
 
 date
 
 echo "zip success!"
 
-rm  /home/web/apache-tomcat-7.0.57/logs/
-find /home/web/apache-tomcat-7.0.57/ -mtime +14 -type f -name '*.7z' -exec rm -f {} \;
-cd /home/web
-. /home/web/.bash_profile
-./runweb
+rm  /home/$USERNAME/apache-tomcat-7.0.57/logs/*
+find /home/$USERNAME/apache-tomcat-7.0.57/ -mtime +7 -type f -name '*.7z' -exec rm -f {} \;
+cd /home/$USERNAME
+. /home/$USERNAME/.bash_profile
+./rundbsync
+
+TMPENDTIME=`date +%T`
+
+echo "BACKUP END TIME:"$TMPENDTIME
 
