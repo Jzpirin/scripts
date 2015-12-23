@@ -5,6 +5,7 @@
 TMPYEAR=`date +%y`
 TMPDATE=`date +%m%d`
 TMPWEEK=`date +%w`
+USER=`whoami`
 . /home/web/.bash_profile
 #export PATH=$PATH:/usr/local/bin;
 
