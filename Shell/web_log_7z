@@ -16,8 +16,6 @@ echo "BACKUP DATE:"$TMPYEAR $TMPDATE
 
 echo "BACKUP BEGIN TIME:"$TMPBEGINTIME
 
-./killdbsync
-
 cd /home/$USERNAME/apache-tomcat-7.0.57
 
 7za a -r -t7z /home/$USERNAME/logback/log_20${TMPYEAR}${TMPDATE}.7z logs
@@ -26,7 +24,11 @@ date
 
 echo "zip success!"
 
-rm  /home/$USERNAME/apache-tomcat-7.0.57/logs/*
+cd /home/$USERNAME
+. /home/$USERNAME/.bash_profile
+./killdbsync
+
+rm -rf /home/$USERNAME/apache-tomcat-7.0.57/logs/*
 find /home/$USERNAME/apache-tomcat-7.0.57/ -mtime +7 -type f -name '*.7z' -exec rm -f {} \;
 cd /home/$USERNAME
 . /home/$USERNAME/.bash_profile
